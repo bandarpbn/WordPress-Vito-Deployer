@@ -14,17 +14,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
-use Spatie\RouteAttributes\Attributes\Delete;
-use Spatie\RouteAttributes\Attributes\Get;
-use Spatie\RouteAttributes\Attributes\Middleware;
-use Spatie\RouteAttributes\Attributes\Post;
-use Spatie\RouteAttributes\Attributes\Prefix;
 
-#[Prefix('bulk-wordpress')]
-#[Middleware(['auth', 'has-project'])]
 class BulkWordPressController extends Controller
 {
-    #[Get('/', name: 'bulk-wordpress.index')]
     public function index(): Response
     {
         $user = user();
@@ -64,7 +56,6 @@ class BulkWordPressController extends Controller
         ]);
     }
 
-    #[Post('/provision', name: 'bulk-wordpress.provision')]
     public function provision(BulkProvisionRequest $request): RedirectResponse
     {
         $user = user();
@@ -73,7 +64,6 @@ class BulkWordPressController extends Controller
         return back()->with('success', 'Provisioning started. Batch ID: '.$batchId)->with('data', ['batch_id' => $batchId]);
     }
 
-    #[Get('/status/{batchId}', name: 'bulk-wordpress.status')]
     public function status(string $batchId): JsonResponse
     {
         $sites = BulkWpSite::where('batch_id', $batchId)
@@ -96,7 +86,6 @@ class BulkWordPressController extends Controller
         ]);
     }
 
-    #[Get('/sites', name: 'bulk-wordpress.sites')]
     public function sites(): JsonResponse
     {
         $sites = BulkWpSite::where('user_id', user()->id)
@@ -108,7 +97,6 @@ class BulkWordPressController extends Controller
         return response()->json($sites);
     }
 
-    #[Post('/retry', name: 'bulk-wordpress.retry')]
     public function retry(Request $request): RedirectResponse
     {
         $request->validate([
@@ -136,7 +124,6 @@ class BulkWordPressController extends Controller
         return back()->with('success', 'Retrying '.$sites->count().' failed sites.');
     }
 
-    #[Delete('/sites', name: 'bulk-wordpress.sites.delete')]
     public function deleteSites(Request $request): RedirectResponse
     {
         $request->validate([
@@ -151,7 +138,6 @@ class BulkWordPressController extends Controller
         return back()->with('success', 'Sites deleted.');
     }
 
-    #[Get('/settings', name: 'bulk-wordpress.settings')]
     public function settings(): Response
     {
         $user = user();
@@ -194,7 +180,6 @@ class BulkWordPressController extends Controller
         ]);
     }
 
-    #[Post('/settings', name: 'bulk-wordpress.settings.save')]
     public function saveSettings(Request $request): RedirectResponse
     {
         $request->validate([
@@ -204,32 +189,4 @@ class BulkWordPressController extends Controller
             'sidebar_widget' => ['nullable', 'string'],
             'max_sites_per_server' => ['nullable', 'integer', 'min:1'],
             'max_concurrent_per_server' => ['nullable', 'integer', 'min:1', 'max:20'],
-            'max_concurrent_global' => ['nullable', 'integer', 'min:1', 'max:100'],
-            'max_retries' => ['nullable', 'integer', 'min:0', 'max:10'],
-            'server_capacities' => ['nullable', 'array'],
-            'server_capacities.*.server_id' => ['required', 'integer'],
-            'server_capacities.*.max_sites' => ['required', 'integer', 'min:1'],
-        ]);
-
-        $user = user();
-        $config = BulkWpConfig::firstOrCreate(['user_id' => $user->id], ['name' => 'default']);
-
-        $config->update($request->only([
-            'plugins', 'themes', 'defaults', 'sidebar_widget',
-            'max_sites_per_server', 'max_concurrent_per_server',
-            'max_concurrent_global', 'max_retries',
-        ]));
-
-        // Update server capacities
-        if ($request->has('server_capacities')) {
-            foreach ($request->input('server_capacities') as $sc) {
-                BulkWpServerCapacity::updateOrCreate(
-                    ['server_id' => $sc['server_id']],
-                    ['max_sites' => $sc['max_sites']]
-                );
-            }
-        }
-
-        return back()->with('success', 'Settings saved.');
-    }
-}
+            'max_concurrent_global' => ['nullable', 'integer', 'min:1', '

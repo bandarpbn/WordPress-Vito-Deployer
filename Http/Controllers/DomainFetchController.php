@@ -7,15 +7,9 @@ use App\Models\DNSProvider;
 use App\Vito\Plugins\Bandarpbn\WordPressVitoDeployer\Actions\FetchDomainsFromDNS;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Spatie\RouteAttributes\Attributes\Get;
-use Spatie\RouteAttributes\Attributes\Middleware;
-use Spatie\RouteAttributes\Attributes\Prefix;
 
-#[Prefix('bulk-wordpress/domains')]
-#[Middleware(['auth', 'has-project'])]
 class DomainFetchController extends Controller
 {
-    #[Get('/', name: 'bulk-wordpress.domains')]
     public function index(Request $request): JsonResponse
     {
         $user = user();
@@ -28,7 +22,6 @@ class DomainFetchController extends Controller
         ]);
     }
 
-    #[Get('/fetch', name: 'bulk-wordpress.domains.fetch')]
     public function fetch(Request $request): JsonResponse
     {
         $request->validate([
