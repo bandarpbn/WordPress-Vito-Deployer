@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Vito\Plugins\VitoDeploy\BulkWordPress\Models;
+namespace App\Vito\Plugins\Bandarpbn\WordpressVitoDeployer\Models;
 
 use App\Models\Server;
 use App\Models\Site;

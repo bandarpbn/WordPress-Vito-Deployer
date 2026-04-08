@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Vito\Plugins\VitoDeploy\BulkWordPress\Actions;
+namespace App\Vito\Plugins\Bandarpbn\WordpressVitoDeployer\Actions;
 
 use App\Models\User;
-use App\Vito\Plugins\VitoDeploy\BulkWordPress\Jobs\ProvisionSingleWordPressSite;
-use App\Vito\Plugins\VitoDeploy\BulkWordPress\Models\BulkWpConfig;
-use App\Vito\Plugins\VitoDeploy\BulkWordPress\Models\BulkWpServerCapacity;
-use App\Vito\Plugins\VitoDeploy\BulkWordPress\Models\BulkWpSite;
+use App\Vito\Plugins\Bandarpbn\WordpressVitoDeployer\Jobs\ProvisionSingleWordPressSite;
+use App\Vito\Plugins\Bandarpbn\WordpressVitoDeployer\Models\BulkWpConfig;
+use App\Vito\Plugins\Bandarpbn\WordpressVitoDeployer\Models\BulkWpServerCapacity;
+use App\Vito\Plugins\Bandarpbn\WordpressVitoDeployer\Models\BulkWpSite;
 use Illuminate\Support\Str;
 
 class BulkProvisionWordPress

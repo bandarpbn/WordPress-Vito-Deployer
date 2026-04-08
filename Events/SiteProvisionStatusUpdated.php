@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Vito\Plugins\VitoDeploy\BulkWordPress\Events;
+namespace App\Vito\Plugins\Bandarpbn\WordpressVitoDeployer\Events;
 
-use App\Vito\Plugins\VitoDeploy\BulkWordPress\Models\BulkWpSite;
+use App\Vito\Plugins\Bandarpbn\WordpressVitoDeployer\Models\BulkWpSite;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
