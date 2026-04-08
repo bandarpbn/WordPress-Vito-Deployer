@@ -79,7 +79,7 @@ export default function BulkWordPressSettings() {
 
   const save = () => {
     setSaving(true);
-    router.post(route('bulk-wordpress.settings.save'), form, {
+    router.post('/bulk-wordpress/settings', form, {
       preserveScroll: true,
       onFinish: () => setSaving(false),
     });
@@ -105,7 +105,7 @@ export default function BulkWordPressSettings() {
       <Container className="max-w-3xl">
         <div className="flex items-start justify-between">
           <Heading title="BulkWordPress Settings" description="Configure default values and provisioning settings" />
-          <a href={route('bulk-wordpress.index')}>
+          <a href="/bulk-wordpress">
             <Button variant="outline">
               <ArrowLeftIcon className="mr-1 h-4 w-4" />
               Back

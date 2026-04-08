@@ -135,7 +135,7 @@ export default function BulkWordPressIndex() {
         theme: r[9] as string,
       }));
 
-      const res = await axios.post(route('bulk-wordpress.provision'), { rows });
+      const res = await axios.post('/bulk-wordpress/provision', { rows });
 
       // Extract batch_id
       const flashData = res.data?.props?.flash?.data;
@@ -156,7 +156,7 @@ export default function BulkWordPressIndex() {
 
     pollRef.current = setInterval(async () => {
       try {
-        const res = await axios.get(route('bulk-wordpress.status', { batchId: id }));
+        const res = await axios.get(`/bulk-wordpress/status/${id}`);
         const sites: SiteStatus[] = res.data.sites;
         setProgress(res.data.progress);
 
@@ -190,11 +190,11 @@ export default function BulkWordPressIndex() {
   const retryFailed = async () => {
     if (!batchId) return;
     try {
-      const res = await axios.get(route('bulk-wordpress.status', { batchId }));
+      const res = await axios.get(`/bulk-wordpress/status/${batchId}`);
       const failedIds = res.data.sites.filter((s: SiteStatus) => s.status === 'failed').map((s: SiteStatus) => s.id);
 
       if (failedIds.length > 0) {
-        await axios.post(route('bulk-wordpress.retry'), { site_ids: failedIds });
+        await axios.post('/bulk-wordpress/retry', { site_ids: failedIds });
         setProvisioning(true);
         startPolling(batchId);
       }
@@ -218,7 +218,7 @@ export default function BulkWordPressIndex() {
       <Container className="max-w-[1400px]">
         <div className="flex items-start justify-between">
           <Heading title="Bulk WordPress Provisioning" description="Provision multiple WordPress sites at once" />
-          <a href={route('bulk-wordpress.settings')}>
+          <a href="/bulk-wordpress/settings">
             <Button variant="outline">
               <SettingsIcon className="mr-1 h-4 w-4" />
               Settings

@@ -36,7 +36,7 @@ export default function DomainSelector({ onDomainsSelected }: DomainSelectorProp
   const loadProviders = async () => {
     if (providersLoaded) return;
     try {
-      const res = await axios.get(route('bulk-wordpress.domains'));
+      const res = await axios.get('/bulk-wordpress/domains');
       setProviders(res.data.providers);
       setProvidersLoaded(true);
     } catch {
@@ -51,7 +51,7 @@ export default function DomainSelector({ onDomainsSelected }: DomainSelectorProp
       if (selectedProvider !== 'all') {
         params.provider_id = selectedProvider;
       }
-      const res = await axios.get(route('bulk-wordpress.domains.fetch'), { params });
+      const res = await axios.get('/bulk-wordpress/domains/fetch', { params });
       setDomains(res.data.domains);
     } catch {
       //
