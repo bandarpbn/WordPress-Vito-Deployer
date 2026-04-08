@@ -189,4 +189,31 @@ class BulkWordPressController extends Controller
             'sidebar_widget' => ['nullable', 'string'],
             'max_sites_per_server' => ['nullable', 'integer', 'min:1'],
             'max_concurrent_per_server' => ['nullable', 'integer', 'min:1', 'max:20'],
-            'max_concurrent_global' => ['nullable', 'integer', 'min:1', '
+            'max_concurrent_global' => ['nullable', 'integer', 'min:1', 'max:100'],
+            'max_retries' => ['nullable', 'integer', 'min:0', 'max:10'],
+            'server_capacities' => ['nullable', 'array'],
+            'server_capacities.*.server_id' => ['required', 'integer'],
+            'server_capacities.*.max_sites' => ['required', 'integer', 'min:1'],
+        ]);
+
+        $user = user();
+        $config = BulkWpConfig::firstOrCreate(['user_id' => $user->id], ['name' => 'default']);
+
+        $config->update($request->only([
+            'plugins', 'themes', 'defaults', 'sidebar_widget',
+            'max_sites_per_server', 'max_concurrent_per_server',
+            'max_concurrent_global', 'max_retries',
+        ]));
+
+        if ($request->has('server_capacities')) {
+            foreach ($request->input('server_capacities') as $sc) {
+                BulkWpServerCapacity::updateOrCreate(
+                    ['server_id' => $sc['server_id']],
+                    ['max_sites' => $sc['max_sites']]
+                );
+            }
+        }
+
+        return back()->with('success', 'Settings saved.');
+    }
+}
