@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Vito\Plugins\Bandarpbn\WordpressVitoDeployer;
+namespace App\Vito\Plugins\Bandarpbn\WordPressVitoDeployer;
 
 use App\Plugins\AbstractPlugin;
 use Illuminate\Support\Facades\Artisan;

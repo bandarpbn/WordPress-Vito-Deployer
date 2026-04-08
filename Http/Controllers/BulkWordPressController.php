@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Vito\Plugins\Bandarpbn\WordpressVitoDeployer\Http\Controllers;
+namespace App\Vito\Plugins\Bandarpbn\WordPressVitoDeployer\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Server;
-use App\Vito\Plugins\Bandarpbn\WordpressVitoDeployer\Actions\BulkProvisionWordPress;
-use App\Vito\Plugins\Bandarpbn\WordpressVitoDeployer\Http\Requests\BulkProvisionRequest;
-use App\Vito\Plugins\Bandarpbn\WordpressVitoDeployer\Models\BulkWpConfig;
-use App\Vito\Plugins\Bandarpbn\WordpressVitoDeployer\Models\BulkWpServerCapacity;
-use App\Vito\Plugins\Bandarpbn\WordpressVitoDeployer\Models\BulkWpSite;
+use App\Vito\Plugins\Bandarpbn\WordPressVitoDeployer\Actions\BulkProvisionWordPress;
+use App\Vito\Plugins\Bandarpbn\WordPressVitoDeployer\Http\Requests\BulkProvisionRequest;
+use App\Vito\Plugins\Bandarpbn\WordPressVitoDeployer\Models\BulkWpConfig;
+use App\Vito\Plugins\Bandarpbn\WordPressVitoDeployer\Models\BulkWpServerCapacity;
+use App\Vito\Plugins\Bandarpbn\WordPressVitoDeployer\Models\BulkWpSite;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -129,7 +129,7 @@ class BulkWordPressController extends Controller
                 'retry_count' => $site->retry_count + 1,
             ]);
 
-            dispatch(new \App\Vito\Plugins\Bandarpbn\WordpressVitoDeployer\Jobs\ProvisionSingleWordPressSite($site))
+            dispatch(new \App\Vito\Plugins\Bandarpbn\WordPressVitoDeployer\Jobs\ProvisionSingleWordPressSite($site))
                 ->onQueue('ssh');
         }
 

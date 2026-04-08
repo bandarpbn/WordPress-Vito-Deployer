@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Vito\Plugins\Bandarpbn\WordpressVitoDeployer\Http\Controllers;
+namespace App\Vito\Plugins\Bandarpbn\WordPressVitoDeployer\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\DNSProvider;
-use App\Vito\Plugins\Bandarpbn\WordpressVitoDeployer\Actions\FetchDomainsFromDNS;
+use App\Vito\Plugins\Bandarpbn\WordPressVitoDeployer\Actions\FetchDomainsFromDNS;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Spatie\RouteAttributes\Attributes\Get;

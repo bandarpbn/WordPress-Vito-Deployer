@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Vito\Plugins\Bandarpbn\WordpressVitoDeployer\Jobs;
+namespace App\Vito\Plugins\Bandarpbn\WordPressVitoDeployer\Jobs;
 
 use App\Actions\Database\CreateDatabase;
 use App\Actions\Database\CreateDatabaseUser;
 use App\Actions\Site\CreateSite;
 use App\Actions\SSL\CreateSSL;
-use App\Vito\Plugins\Bandarpbn\WordpressVitoDeployer\Events\SiteProvisionStatusUpdated;
-use App\Vito\Plugins\Bandarpbn\WordpressVitoDeployer\Models\BulkWpConfig;
-use App\Vito\Plugins\Bandarpbn\WordpressVitoDeployer\Models\BulkWpServerCapacity;
-use App\Vito\Plugins\Bandarpbn\WordpressVitoDeployer\Models\BulkWpSite;
+use App\Vito\Plugins\Bandarpbn\WordPressVitoDeployer\Events\SiteProvisionStatusUpdated;
+use App\Vito\Plugins\Bandarpbn\WordPressVitoDeployer\Models\BulkWpConfig;
+use App\Vito\Plugins\Bandarpbn\WordPressVitoDeployer\Models\BulkWpServerCapacity;
+use App\Vito\Plugins\Bandarpbn\WordPressVitoDeployer\Models\BulkWpSite;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Cache;

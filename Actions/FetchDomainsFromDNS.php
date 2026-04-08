@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Vito\Plugins\Bandarpbn\WordpressVitoDeployer\Actions;
+namespace App\Vito\Plugins\Bandarpbn\WordPressVitoDeployer\Actions;
 
 use App\Models\DNSProvider;
 use App\Models\User;

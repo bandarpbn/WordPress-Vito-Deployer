@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Vito\Plugins\Bandarpbn\WordpressVitoDeployer\Http\Requests;
+namespace App\Vito\Plugins\Bandarpbn\WordPressVitoDeployer\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
